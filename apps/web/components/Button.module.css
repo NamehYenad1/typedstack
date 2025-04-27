@@ -17,17 +17,19 @@
 .lg { font-size: var(--fs-4); padding: var(--spacing-3) var(--spacing-4); }
 
 /* ── colour variants ────────────────────── */
-.primary   { background: var(--primary); color: var(--primary-foreground); } /* Use --primary-fg for text */
-.primary:hover { background: var(--primary-hover); }
+.primary   { background: var(--primary); color: var(--primary-foreground); }
+.primary[data-hovered] { background: var(--primary-hover); }
+.primary[data-pressed] { background: color-mix(in srgb, var(--primary) 85%, black); } /* Darken primary for pressed state */
 
 .ghost     { background: transparent; color: var(--foreground); }
-.ghost:hover { background: var(--background-muted); }
+.ghost[data-hovered] { background: var(--background-muted); }
+.ghost[data-pressed] { background: color-mix(in srgb, var(--background-muted) 85%, black); } /* Darken muted background for pressed state */
 
 /* Accessible focus */
-.btn:focus-visible {
+.btn[data-focus-visible] {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
 /* Disabled */
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn[data-disabled] { opacity: 0.5; cursor: not-allowed; }

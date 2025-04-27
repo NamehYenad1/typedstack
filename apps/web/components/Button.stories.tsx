@@ -43,3 +43,16 @@ export const VariantsAndSizes: Story = {
     </div>
   ),
 };
+
+export const Disabled: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+      <Button {...args} variant="primary" isDisabled>
+        Primary Disabled
+      </Button>
+      <Button {...args} variant="ghost" isDisabled>
+        Ghost Disabled
+      </Button>
+    </div>
+  ),
+};

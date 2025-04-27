@@ -1,0 +1,82 @@
+.card {
+  border-radius: 12px;
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  padding: 0; /* Remove padding from root, apply to sections */
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  /* Add shadow */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow: hidden; /* Keep this for image clipping */
+}
+
+.card:hover {
+  background-color: var(--card-background-hover);
+  border-color: var(--card-border-hover);
+  /* Optional: Enhance shadow on hover */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Add padding to sections instead of the root card */
+.header,
+.content,
+.footer {
+  padding: 1.5rem;
+}
+
+/* Reduce padding if sections are adjacent */
+.header + .content,
+.content + .footer,
+.header + .footer { /* If no content */
+  padding-top: 0;
+}
+
+.header {
+  /* Styles for the header section */
+  display: flex;
+  flex-direction: column; /* Stack title/subtitle */
+  gap: 0.25rem; /* Space between title and potential subtitle */
+}
+
+.title {
+  /* Styles for the title element (h3 by default) */
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0; /* Reset heading margin */
+}
+
+.image {
+  /* Styles for the image */
+  display: block;
+  width: 100%;
+  max-height:200px;
+  object-fit: cover;
+  /* No negative margins needed now as card has no padding */
+}
+
+.content {
+  /* Styles for the main content area */
+  /* Add default gap if multiple direct children */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.description {
+  /* Styles for the description paragraph */
+  color: var(--text-color-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0; /* Reset paragraph margin */
+}
+
+.footer {
+  /* Styles for the footer/actions area */
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: auto; /* Push footer down */
+  border-top: 1px solid var(--card-border); /* Add separator line */
+}
