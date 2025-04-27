@@ -26,19 +26,6 @@
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   width: 100%;
   outline: none; /* Remove default focus outline */
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-  transform: translateX(100%); /* Start off-screen */
-  opacity: 0;
-}
-
-.toast[data-entering] {
-  transform: translateX(0); /* Slide in */
-  opacity: 1;
-}
-
-.toast[data-exiting] {
-  transform: translateX(100%); /* Slide out */
-  opacity: 0;
 }
 
 /* Variant styles */

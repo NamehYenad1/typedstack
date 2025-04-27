@@ -1,5 +1,5 @@
 "use client"; // Required for hooks and event handlers
-
+import { motion } from "framer-motion"; // Ensure using framer-motion
 import React from "react";
 import {
   Button,
@@ -15,47 +15,54 @@ import {
 import { XIcon } from "lucide-react";
 import clsx from "clsx";
 import styles from "./Toast.module.css";
-// Import only the type, queue is used internally
 import { appToastQueue, type AppToastContent } from "./ToastQueue";
 
-// --- Toast Component ---
-// Add generic type argument to AriaToastProps
 export interface ToastProps
   extends Omit<AriaToastProps<AppToastContent>, "toast" | "children"> {
   toast: QueuedToast<AppToastContent>;
 }
 
-export function Toast({ toast, className, ...props }: ToastProps) {
+export function Toast({ toast, className, style, ...props }: ToastProps) {
   const variant = toast.content.variant ?? "info";
 
   return (
-    <AriaToast
-      toast={toast}
-      {...props}
-      // Remove unused renderProps parameter
-      // Add generic type argument to ToastRenderProps
-      className={composeRenderProps(className, (classNames) =>
-        clsx(styles.toast, styles[variant], classNames)
-      )}
+    // Apply motion to a wrapper div
+    <motion.div
+      layout // Animate layout changes
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }} // Adjust exit animation if needed
+      transition={{ type: "spring", stiffness: 300, damping: 30 }} // Use spring physics
     >
-      <AriaToastContent className={styles.content}>
-        <Text slot="title" className={styles.title}>
-          {toast.content.title}
-        </Text>
-        {toast.content.description && (
-          <Text slot="description" className={styles.description}>
-            {toast.content.description}
-          </Text>
+      <AriaToast
+        toast={toast}
+        {...props}
+        // Pass className and style using composeRenderProps to AriaToast
+        className={composeRenderProps(className, (classNames) =>
+          clsx(styles.toast, styles[variant], classNames)
         )}
-      </AriaToastContent>
-      <Button
-        slot="close"
-        className={styles.closeButton}
-        aria-label="Close toast"
+        style={style} // Pass style prop through
       >
-        <XIcon size={16} />
-      </Button>
-    </AriaToast>
+        {/* Keep original children structure */}
+        <AriaToastContent className={styles.content}>
+          <Text slot="title" className={styles.title}>
+            {toast.content.title}
+          </Text>
+          {toast.content.description && (
+            <Text slot="description" className={styles.description}>
+              {toast.content.description}
+            </Text>
+          )}
+        </AriaToastContent>
+        <Button
+          slot="close"
+          className={styles.closeButton}
+          aria-label="Close toast"
+        >
+          <XIcon size={16} />
+        </Button>
+      </AriaToast>
+    </motion.div>
   );
 }
 
@@ -64,21 +71,18 @@ export function Toast({ toast, className, ...props }: ToastProps) {
 export function ToastRegion(
   props: Omit<AriaToastRegionProps<AppToastContent>, "queue" | "children">
 ) {
-  // Destructure className and other props
-  const { className, ...restProps } = props;
+  const { className, style, ...restProps } = props;
   return (
     <AriaToastRegion
-      // Explicitly set the global queue
       queue={appToastQueue}
-      // Spread the rest of the props
       {...restProps}
-      // Compose className correctly
       className={composeRenderProps(className, (classNames) =>
         clsx(styles.region, classNames)
       )}
+      style={composeRenderProps(style, (styleProps) => styleProps)}
     >
-      {/* Internal render function */}
       {(renderProps: { toast: QueuedToast<AppToastContent> }) => (
+        // Render the Toast component which now includes the motion wrapper
         <Toast toast={renderProps.toast} />
       )}
     </AriaToastRegion>
