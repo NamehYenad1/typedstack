@@ -1,0 +1,126 @@
+/* Header container */
+.header {
+  position: sticky; /* Make header sticky */
+  top: 0;
+  z-index: 2; /* Ensure it's above most content */
+  background-color: hsla(var(--background-hsl) / 0.8); /* Use HSL with alpha */
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: var(--spacing-2) var(--spacing-5); 
+  display:flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+}
+
+
+/* Wrapper for content alignment */
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Uses .container utility class from globals.css for max-width and padding */
+}
+
+/* Hamburger Button - Mobile Only */
+.hamburgerButton {
+  display: block; /* Visible by default (mobile) */
+  background: none;
+  border: none;
+  padding: var(--spacing-1);
+  cursor: pointer;
+  color: var(--foreground);
+  z-index: 10; /* Ensure it's clickable over nav */
+}
+
+/* Navigation container */
+.nav {
+  position: fixed; /* Fixed position for overlay */
+  top: 0;
+  left: -100%; /* Start off-screen */
+  width: 80%; /* Adjust width as needed */
+  height: 100vh;
+  background-color: var(--background); /* Solid background */
+  padding: var(--spacing-5) var(--spacing-3); /* Generous padding */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  transition: left 0.3s ease-in-out;
+  z-index: 5; /* Below hamburger button */
+  border-right: 1px solid var(--border);
+}
+
+/* Style for when mobile nav is open */
+.nav.mobileNavOpen {
+  left: 0; /* Slide in */
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.nav li a {
+  text-decoration: none;
+  color: var(--foreground);
+  font-size: var(--fs-4);
+  font-weight: 500;
+}
+
+.nav li a:hover {
+  color: var(--primary);
+}
+
+/* Theme Toggle Button */
+.themeToggle {
+  /* Basic button styling - reuse Button component styles if available */
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: 1px solid var(--border);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: auto; /* Push to bottom in mobile view */
+  align-self: flex-start; /* Align left */
+}
+
+.themeToggle:hover {
+  background-color: var(--muted);
+}
+
+/* Desktop Styles - using a common breakpoint, adjust as needed */
+@media (min-width: 70rem) { /* Use CSS variable for breakpoint */
+ 
+  .nav {
+    position: static; /* Reset position */
+    left: auto;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+    flex-direction: row; /* Align items horizontally */
+    align-items: center;
+    gap: var(--spacing-4);
+    border: none;
+    transition: none;
+  }
+
+  .nav ul {
+    flex-direction: row; /* Align list items horizontally */
+    gap: var(--spacing-3);
+  }
+
+  .nav li a {
+    font-size: var(--fs-3); /* Adjust font size for desktop */
+  }
+
+  .themeToggle {
+    margin-top: 0; /* Reset margin */
+    align-self: center;
+  }
+}
+
+/* Removed the global header and .backdrop selectors */

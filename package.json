@@ -26,7 +26,10 @@
     "packages/*"
   ],
   "dependencies": {
+    "@types/js-cookie": "^3.0.6",
     "clsx": "^2.1.1",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.503.0",
     "motion": "^12.9.2"
   }
 }

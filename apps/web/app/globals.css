@@ -371,16 +371,16 @@ h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
   --spacing-5: 2rem;     /* 32 px - Renamed from --space-5 */
 
   /* ── breakpoints (rems) ─────────────────────────── */
-  --bp-sm : 40rem;   /* 640 px */
-  --bp-md : 48rem;   /* 768 px */
-  --bp-lg : 64rem;   /* 1024 px */
+  --tabletMin: 34.375rem; /* 550px / 16 */
+  --laptopMin: 75rem;  /* 1200px / 16 */
+  --desktopMin: 93.75rem; /* 1500px / 16 */
 }
 
 /* =========================================================
    2. DARK THEME OVERRIDES
    ========================================================= */
 
-[data-theme="dark"] {
+[data-color-theme="dark"] {
   /* No separate dark scale definitions needed anymore */
 
   /* Semantic Aliases Overrides - Now referencing the :root scale */

@@ -1,0 +1,22 @@
+.themeToggle {
+    background: none;
+    border: none;
+    padding: var(--spacing-1);
+    cursor: pointer;
+    color: var(--foreground);
+    display: flex; /* Align icon nicely */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Make it circular */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.themeToggle:hover {
+    background-color: var(--muted); /* Subtle hover effect */
+}
+
+/* Add focus styles for accessibility */
+.themeToggle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}

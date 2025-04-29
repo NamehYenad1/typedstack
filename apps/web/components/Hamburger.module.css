@@ -1,0 +1,16 @@
+.hamburgerButton {
+  display: block; /* Visible by default (mobile) */
+  background: none;
+  border: none;
+  padding: var(--spacing-1);
+  cursor: pointer;
+  color: var(--foreground);
+  z-index: 10; /* Ensure it's clickable over nav */
+}
+
+/* Hide on desktop - this might be better handled in the parent component's media query */
+@media (min-width: 70rem) {
+  .hamburgerButton {
+    display: none;
+  }
+}
